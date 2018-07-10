@@ -19,6 +19,7 @@ public class Order
 
     private String orderNumber;
     private Date orderDate;
+    private Double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "addressId")
@@ -33,7 +34,7 @@ public class Order
 
     }
 
-    public Order(Integer orderId, Account account, String orderNumber, Date orderDate,
+    public Order(Integer orderId, Account account, String orderNumber, Date orderDate, Double totalPrice,
                  Address shippingAddress, Set<OrderLine> orderLineItemList)
     {
         this.orderId = orderId;
@@ -82,6 +83,16 @@ public class Order
     public void setOrderDate(Date orderDate)
     {
         this.orderDate = orderDate;
+    }
+
+    public Double getTotalPrice()
+    {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice)
+    {
+        this.totalPrice = totalPrice;
     }
 
     public Address getShippingAddress()
