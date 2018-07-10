@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-public class Orders
+public class Order
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,13 +28,13 @@ public class Orders
     @JoinColumn(name = "orderLineId")
     private Set<OrderLine> orderLineItemList;
 
-    public Orders()
+    public Order()
     {
 
     }
 
-    public Orders(Integer orderId, Account account, String orderNumber, Date orderDate,
-                  Address shippingAddress, Set<OrderLine> orderLineItemList)
+    public Order(Integer orderId, Account account, String orderNumber, Date orderDate,
+                 Address shippingAddress, Set<OrderLine> orderLineItemList)
     {
         this.orderId = orderId;
         this.account = account;
