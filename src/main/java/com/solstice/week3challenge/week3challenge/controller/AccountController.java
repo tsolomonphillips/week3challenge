@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/accounts")
@@ -17,7 +15,7 @@ public class AccountController
     @Autowired
     private AccountService accountService;
 
-    @GetMapping
+    @GetMapping("")
     public Iterable<Account> getAllAccounts()
     {
         return accountService.getAllAccounts();
@@ -29,7 +27,7 @@ public class AccountController
         return accountService.findById(accountId);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity addAccount(@RequestBody Account account)
     {
         accountService.addAccount(account);
@@ -39,12 +37,12 @@ public class AccountController
     @PutMapping("/{id}")
     public void updateAccount(@PathVariable Integer id, @RequestBody Account account)
     {
-        Account updatedAccount = accountService.findById(id);
-        updatedAccount.setFirstName(account.getFirstName());
-        updatedAccount.setLastName(account.getLastName());
-        updatedAccount.setEmailAddress(account.getEmailAddress());
+        account.setAccountId(id);
+        account.setEmailAddress(account.getEmailAddress());
+        account.setLastName(account.getLastName());
+        account.setFirstName(account.getFirstName());
 
-        accountService.addAccount(account);
+        accountService.updateAccount(account);
     }
 
     @DeleteMapping("/{id}")
