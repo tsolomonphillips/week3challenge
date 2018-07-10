@@ -10,20 +10,20 @@ public class Shipment
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "shipmentId")
+    @Column(name = "shipmentId")
     private Integer shipmentId;
 
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
 
-    @OneToOne
-    @JoinColumn(name = "addressId", nullable = false, insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "addressId")
     private Address shippingAddress;
 
     @OneToMany
     @JoinColumn(name = "orderLineId")
-    private List<OrderLine> orderLineList;
+    private List<OrderLine> orderLineItemList;
 
     private Date shippedDate;
     private Date deliveryDate;
@@ -34,12 +34,12 @@ public class Shipment
     }
 
     public Shipment(Integer shipmentId, Account account, Address shippingAddress,
-                    List<OrderLine> orderLineList, Date shippedDate, Date deliveryDate)
+                    List<OrderLine> orderLineItemList, Date shippedDate, Date deliveryDate)
     {
         this.shipmentId = shipmentId;
         this.account = account;
         this.shippingAddress = shippingAddress;
-        this.orderLineList = orderLineList;
+        this.orderLineItemList = orderLineItemList;
         this.shippedDate = shippedDate;
         this.deliveryDate = deliveryDate;
     }
@@ -74,14 +74,14 @@ public class Shipment
         this.shippingAddress = shippingAddress;
     }
 
-    public List<OrderLine> getOrderLineList()
+    public List<OrderLine> getOrderLineItemList()
     {
-        return orderLineList;
+        return orderLineItemList;
     }
 
-    public void setOrderLineList(List<OrderLine> orderLineList)
+    public void setOrderLineItemList(List<OrderLine> orderLineItemList)
     {
-        this.orderLineList = orderLineList;
+        this.orderLineItemList = orderLineItemList;
     }
 
     public Date getShippedDate()

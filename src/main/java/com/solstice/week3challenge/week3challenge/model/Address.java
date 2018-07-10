@@ -8,29 +8,35 @@ public class Address
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "addressId")
+    @Column(name = "addressId")
     private Integer addressId;
 
     private String street;
     private String aptBuilding;
+    private String city;
+    private String stateProvince;
     private Integer zipPostalCode;
     private String country;
 
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Account account;
 
     public Address()
     {
 
     }
 
-    public Address(Integer addressId, String street, String aptBuilding,
-                   Integer zipPostalCode, String country)// Account account)
+    public Address(Integer addressId, String street, String aptBuilding, String city,
+                   String stateProvince, Integer zipPostalCode, String country)
     {
         this.addressId = addressId;
         this.street = street;
         this.aptBuilding = aptBuilding;
+        this.city = city;
+        this.stateProvince = stateProvince;
         this.zipPostalCode = zipPostalCode;
         this.country = country;
-        //this.account = account;
     }
 
     public Integer getAddressId()
@@ -63,6 +69,26 @@ public class Address
         this.aptBuilding = aptBuilding;
     }
 
+    public String getCity()
+    {
+        return city;
+    }
+
+    public void setCity(String city)
+    {
+        this.city = city;
+    }
+
+    public String getStateProvince()
+    {
+        return stateProvince;
+    }
+
+    public void setStateProvince(String stateProvince)
+    {
+        this.stateProvince = stateProvince;
+    }
+
     public Integer getZipPostalCode()
     {
         return zipPostalCode;
@@ -83,13 +109,13 @@ public class Address
         this.country = country;
     }
 
-//    public Account getAccount()
-//    {
-//        return account;
-//    }
-//
-//    public void setAccount(Account account)
-//    {
-//        this.account = account;
-//    }
+    public Account getAccount()
+    {
+        return account;
+    }
+
+    public void setAccount(Account account)
+    {
+        this.account = account;
+    }
 }

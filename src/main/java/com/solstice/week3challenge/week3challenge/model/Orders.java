@@ -2,49 +2,46 @@ package com.solstice.week3challenge.week3challenge.model;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "order")
-public class Order
+@Table(name = "orders")
+public class Orders
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "orderId")
+    @Column(name = "orderId")
     private Integer orderId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
 
     private String orderNumber;
     private Date orderDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "addressId")
     private Address shippingAddress;
 
     @OneToMany
-    @JoinColumn(name = "orderLineId", insertable = false, updatable = false)
-    private List<OrderLine> orderLineList;
+    @JoinColumn(name = "orderLineId")
+    private Set<OrderLine> orderLineItemList;
 
-    private Double totalPrice;
-
-    public Order()
+    public Orders()
     {
 
     }
 
-    public Order(Integer orderId, Account account, String orderNumber, Date orderDate,
-                 Address shippingAddress, List<OrderLine> orderLineList, Double totalPrice)
+    public Orders(Integer orderId, Account account, String orderNumber, Date orderDate,
+                  Address shippingAddress, Set<OrderLine> orderLineItemList)
     {
         this.orderId = orderId;
         this.account = account;
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
         this.shippingAddress = shippingAddress;
-        this.orderLineList = orderLineList;
-        this.totalPrice = totalPrice;
+        this.orderLineItemList = orderLineItemList;
     }
 
     public Integer getOrderId()
@@ -92,28 +89,18 @@ public class Order
         return shippingAddress;
     }
 
-    public void setShippingAddressList(Address shippingAddress)
+    public void setShippingAddress(Address shippingAddress)
     {
         this.shippingAddress = shippingAddress;
     }
 
-    public List<OrderLine> getOrderLineList()
+    public Set<OrderLine> getOrderLineItemList()
     {
-        return orderLineList;
+        return orderLineItemList;
     }
 
-    public void setOrderLineList(List<OrderLine> orderLineList)
+    public void setOrderLineItemList(Set<OrderLine> orderLineItemList)
     {
-        this.orderLineList = orderLineList;
-    }
-
-    public Double getTotalPrice()
-    {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice)
-    {
-        this.totalPrice = totalPrice;
+        this.orderLineItemList = orderLineItemList;
     }
 }

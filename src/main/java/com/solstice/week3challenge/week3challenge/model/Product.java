@@ -8,14 +8,13 @@ public class Product
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "productId")
+    @Column(name = "productId")
     private Integer productId;
 
     private String name;
     private String description;
     private String image;
     private Double price;
-
 
     public Product()
     {
@@ -81,5 +80,4 @@ public class Product
     {
         this.price = price;
     }
-
 }

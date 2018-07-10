@@ -2,7 +2,7 @@ package com.solstice.week3challenge.week3challenge.model;
 
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
@@ -10,19 +10,17 @@ public class Account
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "accountId")
+    @Column(name = "accountId")
     private Integer accountId;
 
     private String firstName;
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "addressId", updatable = false, insertable = false)
-    private List<Address> addressList;
-
     @OneToMany
-    @JoinColumn(name = "orderId")
-    private List<Order> orderList;
+    @JoinColumn(name = "addressId")
+    private Set<Address> addressList;
+
+    private String emailAddress;
 
 
     public Account()
@@ -31,13 +29,13 @@ public class Account
     }
 
     public Account(Integer accountId, String firstName, String lastName,
-                   List<Address> addressList, List<Order> orderList)
+                   Set<Address> addressList, String emailAddress)
     {
         this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.addressList = addressList;
-        this.orderList = orderList;
+        this.emailAddress = emailAddress;
     }
 
     public Integer getAccountId()
@@ -70,23 +68,23 @@ public class Account
         this.lastName = lastName;
     }
 
-    public List<Address> getAddressList()
+    public Set<Address> getAddressList()
     {
         return addressList;
     }
 
-    public void setAddressList(List<Address> addressList)
+    public void setAddressList(Set<Address> addressList)
     {
         this.addressList = addressList;
     }
 
-    public List<Order> getOrderList()
+    public String getEmailAddress()
     {
-        return orderList;
+        return emailAddress;
     }
 
-    public void setOrderList(List<Order> orderList)
+    public void setEmailAddress(String emailAddress)
     {
-        this.orderList = orderList;
+        this.emailAddress = emailAddress;
     }
 }

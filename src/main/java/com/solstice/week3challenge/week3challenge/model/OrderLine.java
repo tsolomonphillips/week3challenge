@@ -1,9 +1,6 @@
 package com.solstice.week3challenge.week3challenge.model;
 
-import org.hibernate.criterion.Order;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "orderLine")
@@ -11,36 +8,35 @@ public class OrderLine
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "orderLineId")
+    @Column(name = "orderLineId")
     private Integer orderLineId;
 
-    @OneToMany
-    @JoinColumn(name = "productId", insertable = false)
-    private List<Product> productList;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
     private Integer quantity;
     private Double price;
     private Double totalPrice;
 
-    @OneToMany
-    @JoinColumn(name = "shipmentId", insertable = false)
-    private List<Shipment> shipmentList;
-
+    @ManyToOne
+    @JoinColumn(name = "shipmentId")
+    private Shipment shipment;
 
     public OrderLine()
     {
 
     }
 
-    public OrderLine(Integer orderLineId, List<Product> productList, Integer quantity,
-                     Double price, Double totalPrice, List<Shipment> shipmentList)
+    public OrderLine(Integer orderLineId, Product product, Integer quantity, Double price,
+                     Double totalPrice, Shipment shipment)
     {
         this.orderLineId = orderLineId;
-        this.productList = productList;
+        this.product = product;
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
-        this.shipmentList = shipmentList;
+        this.shipment = shipment;
     }
 
     public Integer getOrderLineId()
@@ -53,14 +49,14 @@ public class OrderLine
         this.orderLineId = orderLineId;
     }
 
-    public List<Product> getProductList()
+    public Product getProduct()
     {
-        return productList;
+        return product;
     }
 
-    public void setProductList(List<Product> productList)
+    public void setProduct(Product product)
     {
-        this.productList = productList;
+        this.product = product;
     }
 
     public Integer getQuantity()
@@ -93,14 +89,14 @@ public class OrderLine
         this.totalPrice = totalPrice;
     }
 
-    public List<Shipment> getShipmentList()
+    public Shipment getShipment()
     {
-        return shipmentList;
+        return shipment;
     }
 
-    public void setShipmentList(List<Shipment> shipmentList)
+    public void setShipment(Shipment shipment)
     {
-        this.shipmentList = shipmentList;
+        this.shipment = shipment;
     }
 
 }
