@@ -11,8 +11,6 @@ import java.sql.Date;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer>
 {
-    Iterable<Order> findByDate(Date date);
-
     @Query(value = "SELECT * FROM orders INNER JOIN account ON orders.accountId = account.accountId " +
             "WHERE orders.orderDate = ? ORDER BY orders.date", nativeQuery = true)
     Iterable<Order> getAllOrdersForAccount(@Param("accountId") Integer accountId);

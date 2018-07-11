@@ -24,11 +24,6 @@ public class OrderService
         return orderRepository.findOne(orderId);
     }
 
-    public Iterable<Order> findAllOrdersByDate(Date date)
-    {
-        return orderRepository.findByDate(date);
-    }
-
     public void addOrder(Order order)
     {
         orderRepository.save(order);
