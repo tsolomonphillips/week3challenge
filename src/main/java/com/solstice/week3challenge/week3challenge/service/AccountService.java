@@ -1,6 +1,6 @@
 package com.solstice.week3challenge.week3challenge.service;
 
-import com.solstice.week3challenge.week3challenge.AccountRepository.AccountRepository;
+import com.solstice.week3challenge.week3challenge.repository.AccountRepository;
 import com.solstice.week3challenge.week3challenge.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,9 @@
 package com.solstice.week3challenge.week3challenge.service;
 
-import com.solstice.week3challenge.week3challenge.AccountRepository.OrderRepository;
+import com.solstice.week3challenge.week3challenge.repository.OrderRepository;
 import com.solstice.week3challenge.week3challenge.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
 
 
 @Service

@@ -1,4 +1,4 @@
-package com.solstice.week3challenge.week3challenge.AccountRepository;
+package com.solstice.week3challenge.week3challenge.repository;
 
 import com.solstice.week3challenge.week3challenge.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
