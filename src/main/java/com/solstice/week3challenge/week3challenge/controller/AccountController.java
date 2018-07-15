@@ -1,6 +1,7 @@
 package com.solstice.week3challenge.week3challenge.controller;
 
 import com.solstice.week3challenge.week3challenge.model.Account;
+import com.solstice.week3challenge.week3challenge.model.Order;
 import com.solstice.week3challenge.week3challenge.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,17 @@ public class AccountController
         return accountService.findById(accountId);
     }
 
+    @GetMapping("/orders/{accountId}")
+    public Iterable<Order> getAllOrdersForAccount(@PathVariable Integer accountId)
+    {
+        Account account = new Account();
+        account.setAccountId(accountId);
+
+        Order order = new Order();
+        order.setAccount(account);
+
+        return accountService.getOrderRepository().getAllOrdersForAccount(accountId);
+    }
     @PostMapping("")
     public ResponseEntity addAccount(@RequestBody Account account)
     {

@@ -89,6 +89,11 @@ public class OrderLine
         this.totalPrice = totalPrice;
     }
 
+    public void generateTotalPrice()
+    {
+        this.totalPrice = this.price * this.quantity;
+    }
+
     public Shipment getShipment()
     {
         return shipment;
@@ -98,5 +103,7 @@ public class OrderLine
     {
         this.shipment = shipment;
     }
+
+
 
 }

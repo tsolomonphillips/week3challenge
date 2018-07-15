@@ -1,5 +1,6 @@
 package com.solstice.week3challenge.week3challenge.controller;
 
+import com.solstice.week3challenge.week3challenge.model.Account;
 import com.solstice.week3challenge.week3challenge.model.Order;
 import com.solstice.week3challenge.week3challenge.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class OrderController
     @GetMapping("/{accountId}")
     public Iterable<Order> getOrdersByDate(@PathVariable Integer accountId)
     {
+        Account account = new Account();
+        account.setAccountId(accountId);
+
         return orderService.getAllOrdersForAccount(accountId);
     }
 

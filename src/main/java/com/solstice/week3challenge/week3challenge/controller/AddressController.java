@@ -1,6 +1,5 @@
 package com.solstice.week3challenge.week3challenge.controller;
 
-import com.solstice.week3challenge.week3challenge.model.Account;
 import com.solstice.week3challenge.week3challenge.model.Address;
 import com.solstice.week3challenge.week3challenge.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
