@@ -20,6 +20,7 @@ public class Address
 
     @ManyToOne
     @JoinColumn(name = "accountId")
+    //@JsonIgnoreProperties({"firstName", "lastName", "emailAddress", "addresses"})
     private Account account;
 
     public Address()

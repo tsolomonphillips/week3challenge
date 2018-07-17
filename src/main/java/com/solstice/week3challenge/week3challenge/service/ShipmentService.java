@@ -1,6 +1,7 @@
 package com.solstice.week3challenge.week3challenge.service;
 
 import com.solstice.week3challenge.week3challenge.model.Shipment;
+
 import com.solstice.week3challenge.week3challenge.repository.ShipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

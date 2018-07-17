@@ -17,7 +17,7 @@ public class AddressController
     @GetMapping("")
     public Iterable<Address> getAllAddresses()
     {
-        return addressService.getAllOrders();
+        return addressService.getAll();
     }
 
     @GetMapping("/{addressId}")
@@ -26,10 +26,10 @@ public class AddressController
         return addressService.findById(addressId);
     }
 
-    @PostMapping("")
-    public ResponseEntity addAddress(@RequestBody Address address)
+    @PostMapping("{accountId}")
+    public ResponseEntity addAddress(@PathVariable Integer accountId, @RequestBody Address address)
     {
-        addressService.addAddress(address);
+        addressService.addAddress(accountId, address);
         return new ResponseEntity<>(address, HttpStatus.CREATED);
     }
 

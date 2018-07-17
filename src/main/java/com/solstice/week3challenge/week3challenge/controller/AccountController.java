@@ -2,8 +2,12 @@ package com.solstice.week3challenge.week3challenge.controller;
 
 import com.solstice.week3challenge.week3challenge.model.Account;
 import com.solstice.week3challenge.week3challenge.model.Order;
+import com.solstice.week3challenge.week3challenge.model.OrderDetails;
+import com.solstice.week3challenge.week3challenge.repository.AccountRepository;
+import com.solstice.week3challenge.week3challenge.repository.AddressRepository;
+import com.solstice.week3challenge.week3challenge.repository.OrderRepository;
+import com.solstice.week3challenge.week3challenge.repository.ShipmentRepository;
 import com.solstice.week3challenge.week3challenge.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +17,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/accounts")
 public class AccountController
 {
-    @Autowired
     private AccountService accountService;
+    private AccountRepository accountRepository;
+    private AddressRepository addressRepository;
+    private OrderRepository orderRepository;
+    private ShipmentRepository shipmentRepository;
+
+    public AccountController(AccountService accountService, AccountRepository accountRepository,
+                             AddressRepository addressRepository, OrderRepository orderRepository,
+                             ShipmentRepository shipmentRepository)
+    {
+        this.accountService = accountService;
+        this.accountRepository = accountRepository;
+        this.addressRepository = addressRepository;
+        this.orderRepository = orderRepository;
+        this.shipmentRepository = shipmentRepository;
+    }
 
     @GetMapping("")
     public Iterable<Account> getAllAccounts()
@@ -25,20 +43,21 @@ public class AccountController
     @GetMapping("/{accountId}")
     public Account findById(@PathVariable Integer accountId)
     {
-        return accountService.findById(accountId);
+        return accountService.getOneAccount(accountId);
     }
 
-    @GetMapping("/orders/{accountId}")
-    public Iterable<Order> getAllOrdersForAccount(@PathVariable Integer accountId)
-    {
-        Account account = new Account();
-        account.setAccountId(accountId);
+//    @GetMapping("/orders/{accountId}")
+//    public Iterable<Order> getAllOrdersForAccount(@PathVariable Integer accountId)
+//    {
+//        Account account = new Account();
+//        account.setAccountId(accountId);
+//
+//        Order order = new Order();
+//        order.setAccount(account);
+//
+//        return accountService.getOrderRepository().getAllOrdersForAccount(accountId);
+//    }
 
-        Order order = new Order();
-        order.setAccount(account);
-
-        return accountService.getOrderRepository().getAllOrdersForAccount(accountId);
-    }
     @PostMapping("")
     public ResponseEntity addAccount(@RequestBody Account account)
     {
@@ -60,7 +79,15 @@ public class AccountController
     @DeleteMapping("/{id}")
     public void deleteContact(@PathVariable Integer id)
     {
-        Account accountToDelete = accountService.findById(id);
+        Account accountToDelete = accountService.getOneAccount(id);
         accountService.deleteAccount(accountToDelete);
+    }
+
+    @GetMapping("/orderdetail/{accountId}")
+    public Iterable<OrderDetails> getOrderDetails(@PathVariable Integer accountId)
+    {
+
+
+        return null;
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/orders")
@@ -28,19 +30,26 @@ public class OrderController
         return orderService.findById(orderId);
     }
 
-    @GetMapping("/{accountId}")
-    public Iterable<Order> getOrdersByDate(@PathVariable Integer accountId)
-    {
-        Account account = new Account();
-        account.setAccountId(accountId);
+//    @GetMapping("/{accountId}")
+//    public Iterable<Order> getOrdersByDate(@PathVariable Integer accountId)
+//    {
+//        Account account = new Account();
+//        account.setAccountId(accountId);
+//
+//        return orderService.getAllOrdersForAccount(accountId);
+//    }
 
-        return orderService.getAllOrdersForAccount(accountId);
+    @GetMapping("/{accountId}")
+    public List<Order> listOrdersByAccount(@PathVariable Integer accountId)
+    {
+        return orderService.sortByOrderDate(accountId);
     }
 
     @PostMapping("")
-    public ResponseEntity addOrder(@RequestBody Order order)
+    public ResponseEntity addOrder(@PathVariable Integer accountId,
+                                   @PathVariable Integer addressId, @RequestBody Order order)
     {
-        orderService.addOrder(order);
+        orderService.addOrder(accountId, addressId, order);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 

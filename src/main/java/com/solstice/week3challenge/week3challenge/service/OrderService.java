@@ -1,9 +1,15 @@
 package com.solstice.week3challenge.week3challenge.service;
 
+import com.solstice.week3challenge.week3challenge.model.Account;
+import com.solstice.week3challenge.week3challenge.model.Address;
+import com.solstice.week3challenge.week3challenge.repository.AccountRepository;
+import com.solstice.week3challenge.week3challenge.repository.AddressRepository;
 import com.solstice.week3challenge.week3challenge.repository.OrderRepository;
 import com.solstice.week3challenge.week3challenge.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -11,6 +17,12 @@ public class OrderService
 {
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     public Iterable<Order> getAllOrders()
     {
@@ -22,8 +34,15 @@ public class OrderService
         return orderRepository.findOne(orderId);
     }
 
-    public void addOrder(Order order)
+    public void addOrder(Integer accountId, Integer addressId, Order order)
     {
+        Account account = accountRepository.findOne(accountId);
+        Address address = addressRepository.findOne(addressId);
+
+        order.setAccount(account);
+        order.setShippingAddress(address);
+        order.getTotalPrice();
+
         orderRepository.save(order);
     }
 
@@ -37,8 +56,25 @@ public class OrderService
         orderRepository.save(order);
     }
 
-    public Iterable<Order> getAllOrdersForAccount(Integer accountId)
+    public List<Order> getAllOrdersForAccount(Integer accountId)
     {
-        return orderRepository.getAllOrdersForAccount(accountId);
+        Account account = accountRepository.findOne(accountId);
+
+        List<Order> orderList = orderRepository.findAll();
+
+        for (Order order : orderList)
+        {
+            if (order.getAccount().getAccountId() == account.getAccountId())
+            {
+                orderList.add(order);
+            }
+        }
+
+        return orderList;
+    }
+
+    public List<Order> sortByOrderDate(Integer accountId)
+    {
+        return orderRepository.findByOrderDateOrderByOrderDateAsc(getAllOrdersForAccount(accountId));
     }
 }
