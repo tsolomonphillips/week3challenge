@@ -24,7 +24,6 @@ public class Address
     @ManyToOne
     @JoinColumn(name = "accountId")
     @JsonIgnoreProperties({"firstName", "lastName", "emailAddress", "addressList"})
-    @JsonIgnore
     private Account account;
 
     public Address()

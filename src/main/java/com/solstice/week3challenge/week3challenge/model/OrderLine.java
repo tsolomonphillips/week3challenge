@@ -71,7 +71,7 @@ public class OrderLine
 
     public Double getPrice()
     {
-        return price;
+        return this.product.getPrice();
     }
 
     public void setPrice(Double price)
@@ -81,17 +81,12 @@ public class OrderLine
 
     public Double getTotalPrice()
     {
-        return totalPrice;
+        return this.product.getPrice() * this.quantity;
     }
 
     public void setTotalPrice(Double totalPrice)
     {
         this.totalPrice = totalPrice;
-    }
-
-    public void generateTotalPrice()
-    {
-        this.totalPrice = this.price * this.quantity;
     }
 
     public Shipment getShipment()

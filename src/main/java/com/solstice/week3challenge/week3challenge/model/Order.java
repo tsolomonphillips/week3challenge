@@ -1,5 +1,8 @@
 package com.solstice.week3challenge.week3challenge.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;

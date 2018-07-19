@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/shipments")
 public class ShipmentController
@@ -26,10 +28,17 @@ public class ShipmentController
         return shipmentService.findById(shipmentId);
     }
 
-    @PostMapping("")
-    public ResponseEntity addShipment(@RequestBody Shipment shipment)
+    @GetMapping("/shipment/{accountId}")
+    public List<Shipment> getShipmentsByAccount(@PathVariable Integer accountId)
     {
-        shipmentService.addShipment(shipment);
+        return shipmentService.getAllOrdersForAccount(accountId);
+    }
+
+    @PostMapping("")
+    public ResponseEntity addShipment(@PathVariable Integer accountId, @PathVariable Integer addressId,
+                                      @RequestBody Shipment shipment)
+    {
+        shipmentService.addShipment(accountId, addressId, shipment);
         return new ResponseEntity<>(shipment, HttpStatus.CREATED);
     }
 

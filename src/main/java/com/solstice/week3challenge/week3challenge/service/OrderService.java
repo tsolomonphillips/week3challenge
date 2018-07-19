@@ -60,7 +60,7 @@ public class OrderService
     {
         Account account = accountRepository.findOne(accountId);
 
-        return orderRepository.findByAccountOrderByOrderDateAsc(account);
+        return orderRepository.findByAccountOrderByOrderDateDesc(account);
     }
 
 }
