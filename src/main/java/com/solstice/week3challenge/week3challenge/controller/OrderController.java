@@ -39,10 +39,10 @@ public class OrderController
 //        return orderService.getAllOrdersForAccount(accountId);
 //    }
 
-    @GetMapping("/{accountId}")
+    @GetMapping("/order/{accountId}")
     public List<Order> listOrdersByAccount(@PathVariable Integer accountId)
     {
-        return orderService.sortByOrderDate(accountId);
+        return orderService.getAllOrdersForAccount(accountId);
     }
 
     @PostMapping("")

@@ -1,5 +1,8 @@
 package com.solstice.week3challenge.week3challenge.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,7 +23,8 @@ public class Address
 
     @ManyToOne
     @JoinColumn(name = "accountId")
-    //@JsonIgnoreProperties({"firstName", "lastName", "emailAddress", "addresses"})
+    @JsonIgnoreProperties({"firstName", "lastName", "emailAddress", "addressList"})
+    @JsonIgnore
     private Account account;
 
     public Address()

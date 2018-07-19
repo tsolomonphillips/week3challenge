@@ -60,21 +60,7 @@ public class OrderService
     {
         Account account = accountRepository.findOne(accountId);
 
-        List<Order> orderList = orderRepository.findAll();
-
-        for (Order order : orderList)
-        {
-            if (order.getAccount().getAccountId() == account.getAccountId())
-            {
-                orderList.add(order);
-            }
-        }
-
-        return orderList;
+        return orderRepository.findByAccountOrderByOrderDateAsc(account);
     }
 
-    public List<Order> sortByOrderDate(Integer accountId)
-    {
-        return orderRepository.findByOrderDateOrderByOrderDateAsc(getAllOrdersForAccount(accountId));
-    }
 }
